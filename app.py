@@ -1,5 +1,3 @@
-import email
-from unicodedata import name
 from flask import Flask, render_template, request
 import hashlib
 import controlador
@@ -18,25 +16,23 @@ def validarUsuario():
         pasw = request.form["txtpass"]
         pasw2 = pasw.encode()
         pasw2 = hashlib.sha384(pasw2).hexdigest()
-        respuesta = controlador.validar_usuario(usu, pasw2)
-        print(respuesta)
         print(usu, pasw, pasw2)
-        
+        respuesta = controlador.validar_usuario(usu, pasw2)                      
         if len(respuesta) == 0:
             mensaje = "ERROR DE AUTENTICACION!!! \n Lo invitamos a verificar su usuario(correo) y contraseña"
-            return render_template("informacion.html", datas = mensaje)        
+            return render_template("informacion.html")       
         else:
             return render_template("principal.html")
 
-@app.route("/registrarUsuario", methods=["GET","POST"])
-def registrarUsuario():
-    if request.method=="POST":
-        name = request.form["txtnombre"]
-        email = request.form["txtusuarioregistro"]
-        pasw = request.form["txtpassregistro"]
-        pasw2 = pasw.encode()
-        pasw2 = hashlib.sha384(pasw2).hexdigest()
-        respuesta = controlador.registrar_usuario(name, email, pasw2)
-        mensaje = "El usuario "+ name + " se ha registrado correctamente"
-        return render_template("informacion.html", datas = mensaje)        
+#@app.route("/registrarUsuario", methods=["GET","POST"])
+#def registrarUsuario():
+#    if request.method=="POST":
+#        name = request.form["txtnombre"]
+#        email = request.form["txtusuarioregistro"]
+#        pasw = request.form["txtpassregistro"]
+#        pasw2 = pasw.encode()
+#        pasw2 = hashlib.sha384(pasw2).hexdigest()
+#        respuesta = controlador.registrar_usuario(name, email, pasw2)
+#        mensaje = "El usuario "+ name + " se ha registrado correctamente"
+#        return render_template("informacion.html", datas = mensaje)        
         

@@ -19,8 +19,8 @@ def validarUsuario():
         print(usu, pasw, pasw2)
         respuesta = controlador.validar_usuario(usu, pasw2)                      
         if len(respuesta) == 0:
-            mensaje = "ERROR DE AUTENTICACION!!! \n Lo invitamos a verificar su usuario(correo) y contraseña"
-            return render_template("informacion.html")       
+            mensaje = "ERROR DE AUTENTICACIÓN! Lo invitamos a validar su usuario y contraseña"
+            return render_template("informacion.html", datas = mensaje)       
         else:
             return render_template("principal.html")
 

@@ -2,8 +2,8 @@ import smtplib
 from email.message import EmailMessage 
 
 def enviar(email_destino,mensaje,asunto):
-    email_origen="jesusmerino@uninorte.edu.co"
-    password="k5qYRtZSg.8xweS"
+    email_origen=""
+    password=""
     email = EmailMessage()
     email["From"] = email_origen
     email["To"] = email_destino

@@ -51,10 +51,19 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
-                      
-                      
-                      
-
+                      <form onsubmit="return enviarmail()">
+                        <input placeholder="Asunto" type="text" required class='form-control' id="txtAsunto" name="txtAsunto" max="50"/> 
+                        <hr>
+                        <select id="sl_destino" name="sl_destino" class="form-control" required> 
+                          <option value="">Seleccione el destinatario...</option>
+                          {%for i in datas %}
+                          <option value="{{i['correo']}}">{{i['usuario']}}</option>
+                          {%endfor%}
+                        </select>
+                        <textarea class="form-control" required placeholder="Mensaje" id="txtMensaje" name="txtMensaje"></textarea>
+                        <hr>
+                        <center><button type='submit' class='btn btn-success'>Enviar</button></center>
+                    </form>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
@@ -112,6 +121,22 @@
 <script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
 
 <script>
+
+function enviarmail(){
+  $.ajax({
+    url : 'enviarmail',
+    data : "asunto="+$("#txtAsunto").val()+"&emaildestino="+$("#sl_destino").val()+"&mensaje="+$("#txtMensaje").val(),
+    type : 'POST',
+    success : function(r){
+            alert(r);
+    },
+    error : function(xhr,status){
+        alert('Error, intente en otro momento');
+    }
+  });
+  return false;
+}
+
 function gestionmenus(){
   $("#titulo").html("Gestion de Menus");
 

@@ -9,6 +9,15 @@ def validar_usuario(usuario, password):
     resultado = cursor.fetchall()
     return resultado
 
+def lista_destinatarios(usuario):
+    db = sqlite3.connect("mensajeria.db")
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    consulta = "select * from usuarios where correo<>'"+usuario+"' "
+    cursor.execute(consulta)
+    resultado = cursor.fetchall()
+    return resultado
+
 
 def registrar_usuario(usuario, correo, password, codigo):
     db = sqlite3.connect("mensajeria.db")

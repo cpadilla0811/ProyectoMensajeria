@@ -23,7 +23,8 @@ def validarUsuario():
             mensaje = "ERROR DE AUTENTICACIÓN! Lo invitamos a validar su usuario y contraseña"
             return render_template("informacion.html", datas = mensaje)       
         else:
-            return render_template("principal.html")
+            respuesta2 = controlador.lista_destinatarios(usu)
+            return render_template("principal.html", datas = respuesta2)
 
 @app.route("/registrarUsuario", methods=["GET","POST"])
 def registrarUsuario():
@@ -40,11 +41,11 @@ def registrarUsuario():
         codigo2=codigo2.replace(":","")
         codigo2=codigo2.replace(".","")
 
-        print(codigo2)
+        #print(codigo2)
 
-        mensaje="Sr, usuario su codigo de activacion es :\n\n"+codigo2+ "\n\n Recuerde copiarlo y pegarlo para validarlo en la seccion de login y activar su cuenta.\n\nMuchas Gracias"
+        mensaje="Sr "+name+", usuario su codigo de activacion es :\n\n"+codigo2+ "\n\nRecuerde copiarlo y pegarlo para validarlo en la seccion de login y activar su cuenta.\n\nMuchas Gracias"
 
-        envioemail.enviar(email, mensaje)
+        envioemail.enviar(email, mensaje, "Codigo de Activacion")
 
         respuesta = controlador.registrar_usuario(name, email, pasw2, codigo2)
         mensaje = "El usuario "+ name + " se ha registrado correctamente"
@@ -59,8 +60,19 @@ def activarUsuario():
         respuesta = controlador.activar_usuario(codigo)
 
         if len(respuesta)==0:
-            mensaje = "El codigo de activacion es errone, verifiquelo."
+            mensaje = "El codigo de activacion es erroneo, verifiquelo."
         else:
             mensaje = "El usuario se ha activado exitosamente."
-        return render_template("informacion.html", datas = mensaje)          
+        return render_template("informacion.html", datas = mensaje)     
+
+@app.route("/enviarmail", methods=["GET","POST"])
+def enviarmail():
+        emaildestino = request.form["emaildestino"] 
+        asunto = request.form["asunto"]   
+        mensaje = request.form["mensaje"] 
+        mensaje2  = "Sr usuario, usted recibió un mensaje nuevo, por favor ingrese a la plataforma para observar su email en la pestaña historial. \n\nMuchas gracias."
+
+        envioemail.enviar(emaildestino, mensaje2,"Nuevo mensaje enviado")
+
+        return "Email enviado satisfactoriamente"    
 

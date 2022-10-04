@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RogerRest</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet"
+    href="https://adminlte.io/themes/v3/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/jqvmap/jqvmap.min.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css">
@@ -17,24 +20,26 @@
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/summernote/summernote-bs4.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTELogo"
+        height="60" width="60">
+    </div>
 
 
-  <div class="">
-   
-    <section class="content">
-      <div class="container-fluid">
-        <div class="contariner alert alert-info">
-          <h2>Center MAIL</h2>
+    <div class="">
+
+      <section class="content">
+        <div class="container-fluid">
+          <div class="contariner alert alert-info">
+            <h2>Center MAIL</h2>
           </div>
-        
-          
+
+
           <div class=" row">
             <div class="col-12">
               <!-- Custom Tabs -->
@@ -42,37 +47,40 @@
                 <div class="card-header d-flex p-0">
                   <h3 class="card-title p-3">Center MAIL</h3>
                   <ul class="nav nav-pills ml-auto p-2">
-                    <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Gestion de Envio</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Gestion de Envio</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Historial</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Perfil</a></li>
-                    
+
                   </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
                       <form onsubmit="return enviarmail()">
-                        <input placeholder="Asunto" type="text" required class='form-control' id="txtAsunto" name="txtAsunto" max="50"/> 
+                        <input placeholder="Asunto" type="text" required class='form-control' id="txtAsunto"
+                          name="txtAsunto" max="50" />
                         <hr>
-                        <select id="sl_destino" name="sl_destino" class="form-control" required> 
+                        <select id="sl_destino" name="sl_destino" class="form-control" required>
                           <option value="">Seleccione el destinatario...</option>
                           {%for i in datas %}
                           <option value="{{i['correo']}}">{{i['usuario']}}</option>
                           {%endfor%}
                         </select>
-                        <textarea class="form-control" required placeholder="Mensaje" id="txtMensaje" name="txtMensaje"></textarea>
+                        <textarea class="form-control" required placeholder="Mensaje" id="txtMensaje"
+                          name="txtMensaje"></textarea>
                         <hr>
                         <center><button type='submit' class='btn btn-success'>Enviar</button></center>
-                    </form>
+                      </form>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
-                      
+
 
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
-                      
+
 
                     </div>
                     <!-- /.tab-pane -->
@@ -85,71 +93,73 @@
             <!-- /.col -->
           </div>
 
-          
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+
+          <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
   </div>
- 
+  <!-- ./wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  <!-- jQuery -->
+  <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/jquery-ui/jquery-ui.min.js"></script>
 
-<!-- jQuery -->
-<script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/chart.js/Chart.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/sparklines/sparkline.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/jquery-knob/jquery.knob.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/moment/moment.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/daterangepicker/daterangepicker.js"></script>
+  <script
+    src="https://adminlte.io/themes/v3/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/summernote/summernote-bs4.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="https://adminlte.io/themes/v3/dist/js/adminlte.js"></script>
+  <script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
 
-<!-- Bootstrap 4 -->
-<script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/chart.js/Chart.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/sparklines/sparkline.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/jquery-knob/jquery.knob.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/moment/moment.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/daterangepicker/daterangepicker.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="https://adminlte.io/themes/v3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="https://adminlte.io/themes/v3/dist/js/adminlte.js"></script>
-<script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
+  <script>
 
-<script>
-
-function enviarmail(){
-  $.ajax({
-    url : 'enviarmail',
-    data : "asunto="+$("#txtAsunto").val()+"&emaildestino="+$("#sl_destino").val()+"&mensaje="+$("#txtMensaje").val(),
-    type : 'POST',
-    success : function(r){
-            alert(r);
-    },
-    error : function(xhr,status){
-        alert('Error, intente en otro momento');
+    function enviarmail() {
+      $.ajax({
+        url: 'enviarmail',
+        data: "asunto=" + $("#txtAsunto").val() + "&emaildestino=" + $("#sl_destino").val() + "&mensaje=" + $("#txtMensaje").val(),
+        type: 'POST',
+        success: function (r) {
+          alert(r);
+        },
+        error: function (xhr, status) {
+          alert('Error, intente en otro momento');
+        }
+      });
+      return false;
     }
-  });
-  return false;
-}
 
-function gestionmenus(){
-  $("#titulo").html("Gestion de Menus");
+    function gestionmenus() {
+      $("#titulo").html("Gestion de Menus");
 
-  var info="<h1>informacion de menus</h1>"
-  +"<br>sdfghjkoifgghiojb "
-  +"<br><button class='btn btn-info'>Procesar</button>";
+      var info = "<h1>informacion de menus</h1>"
+        + "<br>sdfghjkoifgghiojb "
+        + "<br><button class='btn btn-info'>Procesar</button>";
 
-  $("#contenido").html(info);
+      $("#contenido").html(info);
 
 
-}
+    }
 
-</script>
+  </script>
 
 </body>
+
 </html>

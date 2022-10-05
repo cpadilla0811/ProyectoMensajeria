@@ -39,7 +39,6 @@
             <h2>Center MAIL</h2>
           </div>
 
-
           <div class=" row">
             <div class="col-12">
               <!-- Custom Tabs -->
@@ -49,7 +48,8 @@
                   <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Gestion de Envio</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Historial</a></li>
+                    <li class="nav-item" onclick="verHistorial()"><a class="nav-link" href="#tab_2"
+                        data-toggle="tab">Historial</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Perfil</a></li>
 
                   </ul>
@@ -75,12 +75,15 @@
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
-
-
+                      <div class="col-6" id="d_enviados" name="d_enviados">
+                        Visualizar correos ENVIADOS
+                      </div>
+                      <div class="col-6" id="d_recibidos" name="d_recibidos">
+                        Visualizar correos RECIBIDOS
+                      </div>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
-
 
                     </div>
                     <!-- /.tab-pane -->
@@ -93,13 +96,11 @@
             <!-- /.col -->
           </div>
 
-
           <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
     </div>
-
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -130,6 +131,20 @@
   <script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
 
   <script>
+
+    function verHistorial() {
+      $.ajax({
+        url: 'HistorialEnviados',
+        data: "",
+        type: 'POST',
+        success: function (r) {
+          $("#d_enviados").html(r)
+        },
+        error: function (xhr, status) {
+          alert('Error, intente en otro momento');
+        }
+      });
+    }
 
     function enviarmail() {
       $.ajax({

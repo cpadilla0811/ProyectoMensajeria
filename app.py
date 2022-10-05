@@ -1,3 +1,4 @@
+from unittest import result
 from flask import Flask, render_template, request
 import hashlib
 import controlador
@@ -69,7 +70,7 @@ def enviarmail():
     asunto = request.form["asunto"]
     mensaje = request.form["mensaje"]
 
-    controlador.registrar_mail(email_origen,emaildestino,asunto,mensaje)
+    controlador.registrar_mail(email_origen, emaildestino, asunto, mensaje)
 
     mensaje2 = "Sr. usuario, usted recibió un mensaje nuevo, por favor ingrese a la plataforma para observar su email en la pestaña historial. \n\nMuchas gracias."
 
@@ -89,3 +90,9 @@ def activarUsuario():
     else:
         mensaje = "El usuario se ha activado exitosamente."
     return render_template("informacion.html", datas=mensaje)
+
+
+@app.route("/HistorialEnviados", methods=["GET", "POST"])
+def HistorialEnviados():
+    resultado = controlador.ver_enviados(email_origen)
+    return render_template("respuesta.html", datas=resultado)

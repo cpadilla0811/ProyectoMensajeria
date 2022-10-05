@@ -12,6 +12,16 @@ def validar_usuario(usuario, password):
     return resultado
 
 
+def ver_enviados(correo):
+    db = sqlite3.connect("mensajeria.db")
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    consulta = "select m.asunto,m.mensaje,m.fecha,m.hora,u.nombreusuario from usuarios u, mensajeria m where u.correo=m.id_usu_recibe and m.is_usu_envia='"+correo+"' order by fecha desc, fecha desc"
+    cursor.execute(consulta)
+    resultado = cursor.fetchall()
+    return resultado
+
+
 def lista_destinatarios(usuario):
     db = sqlite3.connect("mensajeria.db")
     db.row_factory = sqlite3.Row

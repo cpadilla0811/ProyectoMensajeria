@@ -1,13 +1,16 @@
 import sqlite3
 
+
 def validar_usuario(usuario, password):
     db = sqlite3.connect("mensajeria.db")
     db.row_factory = sqlite3.Row
     cursor = db.cursor()
-    consulta = "select * from usuarios where correo='"+usuario+"' and password='"+password+"' and estado='1'"
+    consulta = "select * from usuarios where correo='" + \
+        usuario+"' and password='"+password+"' and estado='1'"
     cursor.execute(consulta)
     resultado = cursor.fetchall()
     return resultado
+
 
 def lista_destinatarios(usuario):
     db = sqlite3.connect("mensajeria.db")
@@ -19,11 +22,24 @@ def lista_destinatarios(usuario):
     return resultado
 
 
+def registrar_mail(origen, destino, asunto, mensaje):
+    db = sqlite3.connect("mensajeria.db")
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    consulta = "insert into mensajeria (asunto, mensaje, fecha, hora, id_usu_envia, id_usu_recibe, estado) values ('" + \
+        asunto+"', '"+mensaje + \
+        "', DATE('now'), TIME('now'), '"+origen+"','"+destino+"','0');"
+    cursor.execute(consulta)
+    db.commit()
+    return "1"
+
+
 def registrar_usuario(usuario, correo, password, codigo):
     db = sqlite3.connect("mensajeria.db")
     db.row_factory = sqlite3.Row
     cursor = db.cursor()
-    consulta = "insert into usuarios (usuario, correo, password, estado, codigoactivacion) values ('"+usuario+"', '"+correo+"', '"+password+"', '0', '"+codigo+"');"
+    consulta = "insert into usuarios (usuario, correo, password, estado, codigoactivacion) values ('" + \
+        usuario+"', '"+correo+"', '"+password+"', '0', '"+codigo+"');"
     cursor.execute(consulta)
     db.commit()
     return "1"

@@ -1,5 +1,14 @@
 import sqlite3
 
+def ver_enviados(usuario, password):
+    db = sqlite3.connect("mensajeria.db")
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    consulta ="select m.asunto,m.cuerpodelmensaje,m.fecha,m.hora, u.usuario from usuarios u, mensajeria m  where u.correo=m.idusuariorecibe and m.idusuarioenvia='"+correo+'"order by fecha desc"
+    cursor.execute(consulta)
+    resultado = cursor.fetchall()
+    return resultado
+
 def validar_usuario(usuario, password):
     db = sqlite3.connect("mensajeria.db")
     db.row_factory = sqlite3.Row
@@ -17,6 +26,15 @@ def lista_destinatarios(usuario):
     cursor.execute(consulta)
     resultado = cursor.fetchall()
     return resultado
+
+def registrar_mail(origen, destino, asunto, mensaje):
+    db = sqlite3.connect("mensajeria.db")
+    db.row_factory = sqlite3.Row
+    cursor = db.cursor()
+    consulta = "insert into mensajeria (asunto,mensaje,fecha,hora,id_usu_envia,id_usu_recibe,estado) values ('"+asunto+"', '"+mensaje+"',DATE('now'),TIME('now'),'"+origen+"','"+destino+"','0')"
+    cursor.execute(consulta)
+    db.commit()
+    return "1"
 
 
 def registrar_usuario(usuario, correo, password, codigo):

@@ -43,7 +43,7 @@
                   <h3 class="card-title p-3">Center MAIL</h3>
                   <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Gestion de Envio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Historial</a></li>
+                    <li class="nav-item" onclick="verHistorial()"><a class="nav-link" href="#tab_2" data-toggle="tab">Historial</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Perfil</a></li>
                     
                   </ul>
@@ -67,9 +67,17 @@
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
+
+                      <div class="row">
+                      <div class="col-6" id='d_enviados' name='d_enviados'></div>
+                      aqui se podra visualizar los correos enviados
+                      <div class="col-6" id='d_recibidos' name='d_recibidos'></div>
+                      aqui se podra visualizar los correos recibidos
                       
 
                     </div>
+
+                  </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
                       
@@ -121,6 +129,22 @@
 <script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
 
 <script>
+function enviarmail(){
+  $.ajax({
+    url : 'HistorialEnviados',
+    data : "",
+    type : 'POST',
+    success : function(r){
+            r="<center class='alert alert-info'><strong>Correos Enviados</center></strong>"+r;
+            $("#d_enviados").html(r)
+    },
+    error : function(xhr,status){
+        alert('Error, intente en otro momento');
+    }
+  });
+
+
+}
 
 function enviarmail(){
   $.ajax({

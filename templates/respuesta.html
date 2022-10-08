@@ -7,19 +7,16 @@
         <th>Mensaje</th>
     </tr>
 
-    {%for m in datas %}
+    {%for i in datas %}
 
     <tr>
-        <td>{{ m['fecha'] }}</td>
-        <td>{{ m['hora'] }}</td>
-        <td>{{ m['idusuarioenvia'] }}</td>
-        <td>{{ m['asunto'] }}</td>
-        <td>{{ m['correo] }}</td>
-        <td>{{ m['mensaje'] }}</td>
+        <td>{{i['fecha']}}</td>
+        <td>{{i['hora']}}</td>
+        <td>{{i['usuario']}}</td>
+        <td>{{i['asunto']}}</td>
+        <td>{{i['cuerpodelmensaje']}}</td>
     </tr>
 
-
-  
-    {%endfor%}
+    {% endfor %}
 
 </table>

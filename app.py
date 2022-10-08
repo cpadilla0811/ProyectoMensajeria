@@ -55,8 +55,8 @@ def registrarUsuario():
         envioemail.enviar(email, mensaje, "Codigo de Activacion")
 
         respuesta = controlador.registrar_usuario(name, email, pasw2, codigo2)
-        mensaje = "El usuario "+ name + " se ha registrado correctamente"
-        return render_template("informacion.html", datas = mensaje)    
+        #mensaje = "El usuario "+ name + " se ha registrado correctamente"
+        return render_template("informacion.html", datas = respuesta)    
 
 
 @app.route("/activarUsuario", methods=["GET","POST"])
@@ -86,6 +86,19 @@ def enviarmail():
     
 @app.route("/HistorialEnviados", methods=["GET","POST"])
 def HistorialEnviados():
-resultado=controlador.ver_enviados(email_origen)
-return render_template("respuesta.html", datas = resultado) 
+    resultado=controlador.ver_enviados(email_origen)
+    return render_template("respuesta.html", datas = resultado) 
 
+@app.route("/HistorialRecibidos", methods=["GET","POST"])
+def HistorialRecibidos():
+    resultado=controlador.ver_recibidos(email_origen)
+    return render_template("respuesta.html", datas = resultado) 
+
+@app.route("/cambiopassword", methods=["GET","POST"])
+def cambiopassword():
+        password = request.form["pass"]
+        passw2 = password.encode()
+        passw2 = hashlib.sha384(passw2).hexdigest()
+
+        controlador.actualizar_pass(passw2,email_origen)
+        return "Actualización Satisfactoria"

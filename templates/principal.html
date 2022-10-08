@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RogerRest</title>
+  <title>Grupo 5</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -31,7 +31,7 @@
     <section class="content">
       <div class="container-fluid">
         <div class="contariner alert alert-info">
-          <h2>Center MAIL</h2>
+          <h2>Centro de mensajes</h2>
           </div>
         
           
@@ -40,11 +40,11 @@
               <!-- Custom Tabs -->
               <div class="card">
                 <div class="card-header d-flex p-0">
-                  <h3 class="card-title p-3">Center MAIL</h3>
+                  <h3 class="card-title p-3"><a href="/"><button class="btn btn-danger">Cerrar Sesion</button></a></h3>
                   <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Gestion de Envio</a></li>
-                    <li class="nav-item" onclick="verHistorial()"><a class="nav-link" href="#tab_2" data-toggle="tab">Historial</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Perfil</a></li>
+                    <li class="nav-item" onclick="HistorialEnviados()"><a class="nav-link" href="#tab_2" data-toggle="tab">Historial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Contraseña</a></li>
                     
                   </ul>
                 </div><!-- /.card-header -->
@@ -69,19 +69,28 @@
                     <div class="tab-pane" id="tab_2">
 
                       <div class="row">
-                      <div class="col-6" id='d_enviados' name='d_enviados'></div>
-                      aqui se podra visualizar los correos enviados
-                      <div class="col-6" id='d_recibidos' name='d_recibidos'></div>
-                      aqui se podra visualizar los correos recibidos
-                      
+                        <div class="col-6" id="d_enviados" name="d_enviados">
+                          aqui se podra visualizar los correos enviados
+                        </div>
+                        <div class="col-6" id="d_recibidos" name="d_recibidos">
+                          aqui se podra visualizar los correos recibidos
+                        </div>
+                      </div>
 
                     </div>
-
-                  </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
                       
-
+                      <center class="alert alert-info"><h3>Cambio de Contraseña</h3></center>
+                      <hr>
+                      <form onsubmit="return cambiopassword()">
+                        Nueva contraseña:
+                        <input required type="password" class="form-control" id="txtpass1" name="txtpass1"/>
+                        Confirmar contraseña:
+                        <input required type="password" class="form-control" id="txtpass2" name="txtpass2"/>
+                        <hr>
+                        <button type="submit" class="btn btn-info">Actualizar</button>
+                      </form>
                     </div>
                     <!-- /.tab-pane -->
                   </div>
@@ -129,7 +138,32 @@
 <script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
 
 <script>
-function enviarmail(){
+
+function cambiopassword(){
+
+  if ($("#txtpass1").val()==$("#txtpass2").val()){
+
+    $.ajax({
+    url : 'cambiopassword',
+    data : "pass="+$("#txtpass1").val(),
+    type : 'POST',
+    success : function(r){
+            alert(r);
+    },
+    error : function(xhr,status){
+        alert('Error,---intente en otro momento');
+    }
+  });
+
+  }else{
+    alert("¡¡ERROR!! Las contraseñas no coinciden.")
+  }
+
+  return false
+
+}
+
+function HistorialEnviados(){
   $.ajax({
     url : 'HistorialEnviados',
     data : "",
@@ -139,7 +173,20 @@ function enviarmail(){
             $("#d_enviados").html(r)
     },
     error : function(xhr,status){
-        alert('Error, intente en otro momento');
+        alert('Error, **** intente en otro momento');
+    }
+  });
+////////////////////////////////////////////////////////////////////////////
+  $.ajax({
+    url : 'HistorialRecibidos',
+    data : "",
+    type : 'POST',
+    success : function(r){
+            r="<center class='alert alert-info'><strong>Correos Recibidos</center></strong>"+r;
+            $("#d_recibidos").html(r)
+    },
+    error : function(xhr,status){
+        alert('Error, **** intente en otro momento');
     }
   });
 

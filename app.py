@@ -21,7 +21,7 @@ def validarUsuario():
         pasw = request.form["txtpass"]
         pasw2 = pasw.encode()
         pasw2 = hashlib.sha384(pasw2).hexdigest()
-        print(usu, pasw, pasw2)
+        #print(usu, pasw, pasw2)
         respuesta = controlador.validar_usuario(usu, pasw2)
 
         global email_origen

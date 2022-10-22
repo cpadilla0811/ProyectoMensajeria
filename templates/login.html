@@ -3,32 +3,57 @@
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>Home</title>
+  <title>Login</title>
   <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
   <link href='#' rel='stylesheet'>
   <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <style>
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      
-      /* Track */
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-      }
-
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: #888; 
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
       }
 
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-      } 
-      body{
-        background-color: #000;
-      } 
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
 
       .card{
         width: 400px;
@@ -44,12 +69,6 @@
       }
 
       .btn-dark {
-        color: #fff;
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-      }
-
-      .btn-dark:hover {
         color: #fff;
         background-color: #0d6efd;
         border-color: #0d6efd;
@@ -88,9 +107,12 @@
         margin-top: 20px;
       } 
   </style>
+  <link href="/static/css/signin.css" rel="stylesheet">
 </head>
-<body className='snippet-body'>
-    <div class="d-flex justify-content-center align-items-center mt-5">
+<body class="text-center" className='snippet-body'>
+  <main class="w-100 m-auto">
+    <img src="https://s3-eu-west-1.amazonaws.com/io.mailtrack.assets/backend/118c32ef61/bundles/mailtrackfrontend/img/mailtrack-logo-on-dark.png" alt="" width="200" height="200">
+    <div class="d-flex justify-content-center align-items-center">
         <div class="card">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item text-center">
@@ -100,15 +122,21 @@
                     <a class="nav-link btr" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Registro</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link btr" id="pills-profile-tab2" data-toggle="pill" href="#pills-profile2" role="tab" aria-controls="pills-profile" aria-selected="false">Validacion Codigo</a>
+                    <a class="nav-link btr" id="pills-profile-tab2" data-toggle="pill" href="#pills-profile2" role="tab" aria-controls="pills-profile" aria-selected="false">Validacion de código</a>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="form px-4 pt-5">
                         <form action="validarUsuario" method="POST">
-                            <input type="email" required name="txtusuario" id='txtusuario' class="form-control" placeholder="Email">
-                            <input type="password" required name="txtpass" id="txtpass" class="form-control" placeholder="Password">
+                            <div class="form-floating">
+                              <input type="email" required name="txtusuario" id='txtusuario' class="form-control" placeholder="Email">
+                              <label for="floatingInput">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                              <input type="password" required name="txtpass" id="txtpass" class="form-control" placeholder="Password">
+                              <label for="floatingInput">Password</label>
+                            </div>
                             <button type="submit" class="btn btn-dark btn-block">Iniciar Sesion</button>
                         </form>
                     </div>
@@ -116,9 +144,18 @@
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="form px-4">
                         <form action="registrarUsuario" method="POST">
+                          <div class="form-floating">
                             <input required type="text" id="txtnombre" name="txtnombre" name="" class="form-control" placeholder="Nombres">
+                            <label for="floatingInput">Nombres</label>
+                          </div>
+                          <div class="form-floating">
                             <input required type="email" name="txtusuarioregistro" id="txtusuarioregistro"  class="form-control" placeholder="Email">
+                            <label for="floatingInput">Email</label>
+                          </div>
+                          <div class="form-floating">
                             <input required type="password" name="txtpassregistro" id="txtpassregistro" class="form-control" placeholder="Password">
+                            <label for="floatingInput">Password</label>
+                          </div>
                             <button type="submit" class="btn btn-dark btn-block">Registrarse</button>
                         </form>
                     </div>
@@ -126,7 +163,10 @@
                 <div class="tab-pane fade" id="pills-profile2" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="form px-4">
                         <form action="activarUsuario" method="POST">
+                          <div class="form-floating">
                             <input required type="text" id="txtcodigo" name="txtcodigo" name="" class="form-control" placeholder="Codigo de Verificacion">
+                            <label for="floatingInput">Código de Verificacion</label>
+                          </div>
                             <button type="submit" class="btn btn-dark btn-block">Validar</button>
                         </form>
                     </div>
@@ -135,6 +175,6 @@
         </div>
     </div>
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
-
+  </main>
 </body>
 </html>

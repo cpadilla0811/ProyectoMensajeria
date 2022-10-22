@@ -62,9 +62,13 @@ def registrarUsuario():
         mensaje = "Sr "+name+", usuario su codigo de activacion es :\n\n"+codigo2 + \
             "\n\nRecuerde copiarlo y pegarlo para validarlo en la seccion de login y activar su cuenta.\n\nMuchas Gracias"
 
-        envioemail.enviar(email, mensaje, "Codigo de Activacion")
+        respEmail = envioemail.enviar(email, mensaje, "Codigo de Activacion")
 
         respuesta = controlador.registrar_usuario(name, email, pasw2, codigo2)
+
+        if respEmail=="0":
+            respuesta = "El usuario se ha registrado correctamente. No fue posible enviar el correo electrónico, utilize el siguiente código de activación: "+codigo2
+            
         #mensaje = "El usuario "+ name + " se ha registrado correctamente"
         return render_template("informacion.html", datas = respuesta)    
 
